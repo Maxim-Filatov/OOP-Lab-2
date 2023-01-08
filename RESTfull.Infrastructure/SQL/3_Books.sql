@@ -3,9 +3,10 @@ GO
 
 CREATE TABLE [dbo].[Books] (
 	[id] [int] IDENTITY(1, 1) NOT NULL,
-	[name] [nvarchar](max) NOT NULL,
-	[author_id] [int] NOT NULL,
-	[year] [int] NOT NULL,
+	[name] [nvarchar](max),
+	[author_id] [int],
+	[year] [int],
+	[description] [nvarchar](max),
  CONSTRAINT [PK_Books] PRIMARY KEY CLUSTERED ([id] ASC)
 ) ON [PRIMARY]
 GO

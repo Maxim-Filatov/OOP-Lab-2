@@ -1,3 +1,10 @@
+-- *** CREATE new migration ***
+-- Add-Migration InitialCreate
+-- Update-Database
+
+DROP DATABASE [RESTFull]
+GO
+
 CREATE DATABASE [RESTFull]
  CONTAINMENT = NONE
  ON PRIMARY 

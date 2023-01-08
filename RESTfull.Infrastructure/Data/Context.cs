@@ -8,16 +8,25 @@ namespace RESTfull.Infrastructure
         public Context(DbContextOptions options) : base(options)
         {
         }
+        public DbSet<Author> Authors { get; set; }
+
+        public DbSet<Book> Books { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // configures many-to-one relationship
             modelBuilder.Entity<Book>()
-                .HasOne(e => e.Author);
+                .HasOne(b => b.Author)
+                .WithMany(a => a.Books)
+                .HasForeignKey(b => b.AuthorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // configures one-to-many relationship
+            modelBuilder.Entity<Author>()
+                .HasMany(a => a.Books)
+                .WithOne(b => b.Author)
+                .HasForeignKey(b => b.AuthorId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
-
-        public DbSet<Domain.Author> Authors { get; set; }
-
-        public DbSet<Domain.Book> Books { get; set; }
-
     }
 }

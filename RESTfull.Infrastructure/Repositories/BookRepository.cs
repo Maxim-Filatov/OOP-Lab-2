@@ -9,9 +9,17 @@ namespace RESTfull.Infrastructure
         {
         }
 
+        public async Task<List<BookDTO>> GetAllAsyncDTO()
+        {
+            return await _context.Books
+                .OrderBy(b => b.Name)
+                .Select(b => new BookDTO(b))
+                .ToListAsync();
+        }
+
         public async Task<List<Book>> GetAllAsync()
         {
-            return await _context.Books.OrderBy(p => p.Name).ToListAsync();
+            return await _context.Books.OrderBy(b => b.Name).ToListAsync();
         }
         public async Task<Book> GetByIdAsync(int id)
         {
